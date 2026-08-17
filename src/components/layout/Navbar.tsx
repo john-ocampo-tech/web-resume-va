@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 // --- 1. Types ---
 export type TabType = 'about' | 'resume' | 'contact';
@@ -20,7 +20,6 @@ export const Navbar = ({ activeTab, onSelectTab }: NavbarProps) => {
 
   return (
     <nav className="nav-sidebar">
-      {/* Import Fonts directly for maximum "vibe" */}
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Playfair+Display:ital,wght@1,600&display=swap');
 
@@ -28,7 +27,7 @@ export const Navbar = ({ activeTab, onSelectTab }: NavbarProps) => {
           width: 72px;
           height: 100vh;
           background: #ffffff;
-          border-right: 1px solid #e5e5e0; /* Matched to your card borders */
+          border-right: 1px solid #e5e5e0;
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -45,20 +44,18 @@ export const Navbar = ({ activeTab, onSelectTab }: NavbarProps) => {
           gap: 12px;
         }
 
-        /* --- The Dark Pill --- */
         .nav-indicator {
           position: absolute;
           left: 0;
           width: 54px;
           height: 54px;
-          background: #1a1a1a; /* Rich off-black */
+          background: #1a1f1c;
           border-radius: 12px;
           z-index: 0;
           box-shadow: 0 8px 20px rgba(0,0,0,0.12);
           transition: transform 0.5s cubic-bezier(0.2, 1, 0.2, 1);
         }
 
-        /* --- Buttons --- */
         .nav-item {
           position: relative;
           z-index: 1;
@@ -85,18 +82,16 @@ export const Navbar = ({ activeTab, onSelectTab }: NavbarProps) => {
           color: #1a1a1a;
         }
 
-        /* --- Typography (The "Vibe" Fix) --- */
         .nav-label {
           font-family: 'Plus Jakarta Sans', sans-serif;
           font-size: 7.5px;
           font-weight: 800;
-          letter-spacing: 0.08em; /* Breathable spacing */
+          letter-spacing: 0.08em;
           text-transform: uppercase;
           margin-top: 5px;
           -webkit-font-smoothing: antialiased;
         }
 
-        /* --- Footer Branding --- */
         .nav-brand {
           margin-top: auto;
           font-family: 'Playfair Display', serif;
@@ -132,13 +127,10 @@ export const Navbar = ({ activeTab, onSelectTab }: NavbarProps) => {
         ))}
       </div>
 
-      {/* Your Initial in matching Serif font */}
       <div className="nav-brand">J</div>
     </nav>
   );
 };
-
-// --- 3. Robust Icon Set (1.6 Stroke for clarity) ---
 
 const ICON_SIZE = 18;
 const STROKE_WIDTH = 1.6;
