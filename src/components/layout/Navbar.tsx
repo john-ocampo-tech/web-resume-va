@@ -1,3 +1,6 @@
+import React, { useMemo } from 'react';
+
+// --- 1. Types ---
 export type TabType = 'about' | 'resume' | 'contact';
 
 interface NavbarProps {
@@ -5,69 +8,57 @@ interface NavbarProps {
   onSelectTab: (tab: TabType) => void;
 }
 
+// --- 2. Main Component ---
 export const Navbar = ({ activeTab, onSelectTab }: NavbarProps) => {
-  const iconStyle = { 
-    width: '18px', 
-    height: '18px', 
-    fill: 'none', 
-    stroke: 'currentColor', 
-    strokeWidth: 1.8, 
-    strokeLinecap: 'round' as const, 
-    strokeLinejoin: 'round' as const 
-  };
+  const tabs = useMemo(() => [
+    { id: 'about' as TabType, label: 'About', icon: <AboutIcon /> },
+    { id: 'resume' as TabType, label: 'Resume', icon: <ResumeIcon /> },
+    { id: 'contact' as TabType, label: 'Contact', icon: <ContactIcon /> },
+  ], []);
 
-  // Calculate the vertical offset index (0, 1, or 2)
-  const activeIndex = activeTab === 'about' ? 0 : activeTab === 'resume' ? 1 : 2;
+  const activeIndex = tabs.findIndex(t => t.id === activeTab);
 
   return (
-    <nav className="portfolio-navbar">
+    <nav className="nav-sidebar">
+      {/* Import Fonts directly for maximum "vibe" */}
       <style>{`
-        .portfolio-navbar {
-          width: 76px;
-          height: 100%;
-          background-color: #ffffff;
-          border-right: 1px solid #e4e1d7;
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Playfair+Display:ital,wght@1,600&display=swap');
+
+        .nav-sidebar {
+          width: 72px;
+          height: 100vh;
+          background: #ffffff;
+          border-right: 1px solid #e5e5e0; /* Matched to your card borders */
           display: flex;
           flex-direction: column;
           align-items: center;
-          padding: 24px 10px;
+          padding: 32px 0;
           box-sizing: border-box;
-          flex-shrink: 0;
+          position: sticky;
+          top: 0;
         }
 
-        .nav-container {
+        .nav-stack {
           position: relative;
           display: flex;
           flex-direction: column;
           gap: 12px;
         }
 
-        /* Sharper Dark Pill with Thin Cool Border */
-        .active-pill {
+        /* --- The Dark Pill --- */
+        .nav-indicator {
           position: absolute;
-          top: 0;
           left: 0;
           width: 54px;
           height: 54px;
-          background-color: #1a1f1c;
-          border-radius: 8px; /* Crisp, low-radius edge */
-          
-          /* Thin crisp border + glass highlight */
-          border: 1px solid rgba(255, 255, 255, 0.18);
-          box-shadow: 
-            0 4px 12px rgba(0, 0, 0, 0.15),
-            inset 0 1px 1px rgba(255, 255, 255, 0.2);
-          
-          pointer-events: none;
+          background: #1a1a1a; /* Rich off-black */
+          border-radius: 12px;
           z-index: 0;
-          box-sizing: border-box;
-
-          /* Ultra-smooth elastic spring animation */
-          transform: translateZ(0);
-          will-change: transform;
-          transition: transform 320ms cubic-bezier(0.34, 1.56, 0.64, 1);
+          box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+          transition: transform 0.5s cubic-bezier(0.2, 1, 0.2, 1);
         }
 
+        /* --- Buttons --- */
         .nav-item {
           position: relative;
           z-index: 1;
@@ -77,111 +68,100 @@ export const Navbar = ({ activeTab, onSelectTab }: NavbarProps) => {
           flex-direction: column;
           align-items: center;
           justify-content: center;
-          gap: 4px;
-          border-radius: 8px;
           border: none;
-          outline: none;
+          background: transparent;
           cursor: pointer;
-          background-color: transparent;
-          color: #717772;
-          
-          /* GPU Acceleration & Smooth Motion Curve */
-          transform: translateZ(0);
-          will-change: color, transform;
-          transition: color 200ms ease, transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
+          color: #8c8c87;
+          outline: none;
+          padding: 0;
+          transition: color 0.3s ease;
         }
 
-        /* Ghost Hover Background Pill */
-        .nav-item::before {
-          content: '';
-          position: absolute;
-          inset: 3px;
-          background-color: #f1efe8;
-          border-radius: 6px;
-          opacity: 0;
-          transform: scale(0.85);
-          transition: opacity 200ms ease, transform 200ms cubic-bezier(0.16, 1, 0.3, 1);
-          z-index: -1;
-          pointer-events: none;
-        }
-
-        /* Hover State for Inactive Items */
-        .nav-item:hover:not(.active)::before {
-          opacity: 1;
-          transform: scale(1);
-        }
-
-        .nav-item:hover:not(.active) {
-          color: #1a1f1c;
-          transform: translateY(-2px) translateZ(0);
-        }
-
-        /* Retain crisp white color on selected tab */
         .nav-item.active {
           color: #ffffff;
         }
 
-        /* Tactile Press Down Effect */
-        .nav-item:active {
-          transform: scale(0.92) translateZ(0) !important;
+        .nav-item:hover:not(.active) {
+          color: #1a1a1a;
         }
 
-        /* Proportioned Micro-Typography */
+        /* --- Typography (The "Vibe" Fix) --- */
         .nav-label {
-          font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Plus Jakarta Sans", "Inter", "Segoe UI", sans-serif;
-          font-size: 0.50rem; 
-          font-weight: 700;
-          letter-spacing: 0.08em;
-          line-height: 1;
+          font-family: 'Plus Jakarta Sans', sans-serif;
+          font-size: 7.5px;
+          font-weight: 800;
+          letter-spacing: 0.08em; /* Breathable spacing */
           text-transform: uppercase;
-          pointer-events: none;
+          margin-top: 5px;
           -webkit-font-smoothing: antialiased;
+        }
+
+        /* --- Footer Branding --- */
+        .nav-brand {
+          margin-top: auto;
+          font-family: 'Playfair Display', serif;
+          font-style: italic;
+          font-size: 20px;
+          font-weight: 600;
+          color: #1a1a1a;
+          opacity: 0.15;
+          transition: opacity 0.3s ease;
+          cursor: default;
+        }
+        
+        .nav-brand:hover {
+          opacity: 0.8;
         }
       `}</style>
 
-      <div className="nav-container">
-        {/* The Dark Pill that Glides */}
+      <div className="nav-stack">
         <div 
-          className="active-pill" 
-          style={{ transform: `translateY(${activeIndex * 66}px)` }} 
+          className="nav-indicator" 
+          style={{ transform: `translateY(${activeIndex * (54 + 12)}px)` }} 
         />
 
-        <button 
-          className={`nav-item ${activeTab === 'about' ? 'active' : ''}`}
-          onClick={() => onSelectTab('about')}
-          title="About"
-        >
-          <svg viewBox="0 0 24 24" style={iconStyle}>
-            <circle cx="12" cy="7" r="4"/>
-            <path d="M5.5 21a6.5 6.5 0 0 1 13 0"/>
-          </svg>
-          <span className="nav-label">ABOUT</span>
-        </button>
-
-        <button 
-          className={`nav-item ${activeTab === 'resume' ? 'active' : ''}`}
-          onClick={() => onSelectTab('resume')}
-          title="Resume"
-        >
-          <svg viewBox="0 0 24 24" style={iconStyle}>
-            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-            <polyline points="14 2 14 8 20 8"/>
-          </svg>
-          <span className="nav-label">RESUME</span>
-        </button>
-
-        <button 
-          className={`nav-item ${activeTab === 'contact' ? 'active' : ''}`}
-          onClick={() => onSelectTab('contact')}
-          title="Contact"
-        >
-          <svg viewBox="0 0 24 24" style={iconStyle}>
-            <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-            <polyline points="22,6 12,13 2,6"/>
-          </svg>
-          <span className="nav-label">CONTACT</span>
-        </button>
+        {tabs.map((tab) => (
+          <button
+            key={tab.id}
+            className={`nav-item ${activeTab === tab.id ? 'active' : ''}`}
+            onClick={() => onSelectTab(tab.id)}
+          >
+            {tab.icon}
+            <span className="nav-label">{tab.label}</span>
+          </button>
+        ))}
       </div>
+
+      {/* Your Initial in matching Serif font */}
+      <div className="nav-brand">J</div>
     </nav>
   );
 };
+
+// --- 3. Robust Icon Set (1.6 Stroke for clarity) ---
+
+const ICON_SIZE = 18;
+const STROKE_WIDTH = 1.6;
+
+const AboutIcon = () => (
+  <svg width={ICON_SIZE} height={ICON_SIZE} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={STROKE_WIDTH} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2" />
+    <circle cx="12" cy="7" r="4" />
+  </svg>
+);
+
+const ResumeIcon = () => (
+  <svg width={ICON_SIZE} height={ICON_SIZE} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={STROKE_WIDTH} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+    <polyline points="14 2 14 8 20 8" />
+    <line x1="16" y1="13" x2="8" y2="13" />
+    <line x1="16" y1="17" x2="8" y2="17" />
+  </svg>
+);
+
+const ContactIcon = () => (
+  <svg width={ICON_SIZE} height={ICON_SIZE} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth={STROKE_WIDTH} strokeLinecap="round" strokeLinejoin="round">
+    <path d="M22 2L11 13" />
+    <polygon points="22 2 15 22 11 13 2 9 22 2" />
+  </svg>
+);
