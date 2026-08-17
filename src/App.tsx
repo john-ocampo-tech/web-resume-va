@@ -105,7 +105,7 @@ const ResumeView = (_props: { resume?: Resume }) => {
         </h2>
         <a
           href="/resume.pdf"
-          download="Resume.pdf"
+          download="John Frederick Ocampo CV.pdf"
           className="submit-btn"
           style={{
             fontSize: '0.75rem',
