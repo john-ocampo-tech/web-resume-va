@@ -1,0 +1,16 @@
+[
+  {
+    "id": "cafe-pos",
+    "title": "Cafe Management System",
+    "description": "A high-performance point-of-sale system built to streamline cafe operations, order tracking, and inventory management.",
+    "techStack": ["React 19", "TypeScript", "Tailwind CSS"],
+    "featured": true
+  },
+  {
+    "id": "placeholder-project",
+    "title": "Coming Soon",
+    "description": "A new project is currently in the architectural phase. Stay tuned for a modern web solution.",
+    "techStack": ["React", "TypeScript"],
+    "featured": false
+  }
+]

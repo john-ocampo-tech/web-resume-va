@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" width="256" height="256" fill="none">
+  <title>Minimal amber owl logo</title>
+  <desc>Symmetrical geometric owl silhouette with amber body and cream face and belly.</desc>
+
+  <!-- Main owl silhouette -->
+  <path fill="#F2B84B" d="
+    M70 34
+    C72 54 81 63 96 70
+    C114 61 142 61 160 70
+    C175 63 184 54 186 34
+    C203 49 211 67 202 84
+    C216 101 222 122 219 145
+    C215 180 194 211 162 227
+    C148 234 135 239 128 241
+    C121 239 108 234 94 227
+    C62 211 41 180 37 145
+    C34 122 40 101 54 84
+    C45 67 53 49 70 34Z"/>
+
+  <!-- Cream facial mask -->
+  <path fill="#FFF4D8" d="
+    M82 78
+    C96 68 111 64 128 64
+    C145 64 160 68 174 78
+    C163 82 153 90 147 103
+    C141 116 139 132 128 142
+    C117 132 115 116 109 103
+    C103 90 93 82 82 78Z"/>
+
+  <!-- Eye discs -->
+  <circle cx="96" cy="108" r="28" fill="#FFF4D8"/>
+  <circle cx="160" cy="108" r="28" fill="#FFF4D8"/>
+  <circle cx="96" cy="108" r="16" fill="#241A2B"/>
+  <circle cx="160" cy="108" r="16" fill="#241A2B"/>
+
+  <!-- Brow / central forehead shape -->
+  <path fill="#FFF4D8" d="M94 77 C106 68 116 65 128 65 C140 65 150 68 162 77 C150 75 140 78 128 91 C116 78 106 75 94 77Z"/>
+
+  <!-- Beak -->
+  <path fill="#241A2B" d="M128 121 L141 139 L128 160 L115 139 Z"/>
+
+  <!-- Cream belly -->
+  <path fill="#FFF4D8" d="
+    M128 143
+    C111 156 99 171 98 188
+    C97 208 109 222 128 232
+    C147 222 159 208 158 188
+    C157 171 145 156 128 143Z"/>
+
+  <!-- Feet -->
+  <path fill="#F2B84B" d="M74 226 C68 236 61 246 65 250 C70 254 82 243 89 234 L99 249 C104 255 112 250 108 243 L96 226Z"/>
+  <path fill="#F2B84B" d="M160 226 L148 243 C144 250 152 255 157 249 L167 234 C174 243 186 254 191 250 C195 246 188 236 182 226Z"/>
+</svg>
